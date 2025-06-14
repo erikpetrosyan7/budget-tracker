@@ -1,25 +1,27 @@
 import { useContext } from 'react';
-import { BudgetContext } from '../context/BudgetContext';
+import { TransactionsContext } from '../context/BudgetContext';
 
-function BalanceDisplay(){
-    const {transactions} = useContext(BudgetContext)
-    
-   const income = transactions
-    .filter(tx => tx.amount > 0)
-    .reduce((acc, tx) => acc + +tx.amount, 0);
+function BalanceDisplay() {
+	const transactions = useContext(TransactionsContext);
 
-  const expense = transactions
-    .filter(tx => tx.amount < 0)
-    .reduce((acc, tx) => acc + +tx.amount, 0);
+	const income = transactions
+		.filter(tx => tx.amount > 0)
+		.reduce((acc, tx) => acc + +tx.amount, 0);
 
-  const balance = income + expense;
+	const expense = transactions
+		.filter(tx => tx.amount < 0)
+		.reduce((acc, tx) => acc + +tx.amount, 0);
 
-  return (
-    <div style={{ marginBottom: '20px' }}>
-      <h2>Balance: ${balance}</h2>
-      <p style={{ color: 'green' }}>Income: +${income}</p>
-      <p style={{ color: 'red' }}>Expenses: -${Math.abs(expense)}</p>
-    </div>
-  )
+	let balance = income + expense;
+
+	return (
+		<div>
+			<h2>Balance: ${balance}</h2>
+			<p className='income-text'>Income: +${income}</p>
+			<p className='expense-text'>
+				Expenses: -${Math.max(0, Math.abs(expense))}
+			</p>
+		</div>
+	);
 }
-export default BalanceDisplay
+export default BalanceDisplay;

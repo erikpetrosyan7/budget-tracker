@@ -1,35 +1,23 @@
-import { useContext } from "react";
-import { BudgetContext } from "../context/BudgetContext";
+import { useContext } from 'react';
+import { DispatchContext } from '../context/BudgetContext';
 
-function TransactionItem({transaction}) {
-    const {dispatch} = useContext(BudgetContext)
+function TransactionItem({ transaction }) {
+	const dispatch = useContext(DispatchContext);
 
-    function handleDelete(){
-        dispatch({ type: 'DELETE_TRANSACTION', newTransaction: transaction.id });
-    }
+	function handleDelete() {
+		dispatch({ type: 'DELETE_TRANSACTION', newTransaction: transaction.id });
+	}
 
-    return (
-        <li
-            style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '10px',
-            borderBottom: '1px solid #ccc',
-            paddingBottom: '5px',
-      }}
-        >
-        <span>{transaction.description}</span>
-        <span>
-            {transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount)}
-            <button
-            onClick={handleDelete}
-            style={{ marginLeft: '10px', color: 'red' }}
-            >
-            x
-            </button>
-        </span>
-        </li>
-    )
-
+	return (
+		<li className='transaction-item'>
+			<span>{transaction.description}</span>
+			<span>
+				{transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount)}
+				<button onClick={handleDelete} className='handle-delete'>
+					x
+				</button>
+			</span>
+		</li>
+	);
 }
-export default TransactionItem
+export default TransactionItem;
