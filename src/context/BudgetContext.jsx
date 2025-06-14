@@ -9,14 +9,12 @@ function budgetReducer(state, action) {
 		case 'ADD_TRANSACTION':
 			return {
 				...state,
-				transactions: [action.newTransaction, ...state.transactions],
+				transactions: [action.payload, ...state.transactions],
 			};
 		case 'DELETE_TRANSACTION':
 			return {
 				...state,
-				transactions: state.transactions.filter(
-					t => t.id !== action.newTransaction
-				),
+				transactions: state.transactions.filter(t => t.id !== action.payload),
 			};
 		default:
 			return state;

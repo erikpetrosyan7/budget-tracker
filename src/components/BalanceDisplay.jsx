@@ -5,12 +5,12 @@ function BalanceDisplay() {
 	const transactions = useContext(TransactionsContext);
 
 	const income = transactions
-		.filter(tx => tx.amount > 0)
-		.reduce((acc, tx) => acc + +tx.amount, 0);
+		.filter(t => t.amount > 0)
+		.reduce((acc, t) => acc + +t.amount, 0);
 
 	const expense = transactions
-		.filter(tx => tx.amount < 0)
-		.reduce((acc, tx) => acc + +tx.amount, 0);
+		.filter(t => t.amount < 0)
+		.reduce((acc, t) => acc + +t.amount, 0);
 
 	let balance = income + expense;
 

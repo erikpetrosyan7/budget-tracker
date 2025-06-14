@@ -5,14 +5,23 @@ function TransactionItem({ transaction }) {
 	const dispatch = useContext(DispatchContext);
 
 	function handleDelete() {
-		dispatch({ type: 'DELETE_TRANSACTION', newTransaction: transaction.id });
+		dispatch({ type: 'DELETE_TRANSACTION', payload: transaction.id });
 	}
 
+	let colorClass;
+	if (transaction.amount < 0) {
+		colorClass = 'expense-text';
+	} else {
+		colorClass = 'income-text';
+	}
 	return (
 		<li className='transaction-item'>
 			<span>{transaction.description}</span>
 			<span>
-				{transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount)}
+				<span className={colorClass}>
+					{transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount)}
+				</span>
+
 				<button onClick={handleDelete} className='handle-delete'>
 					x
 				</button>

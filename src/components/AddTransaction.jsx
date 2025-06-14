@@ -15,7 +15,7 @@ export default function AddTransaction() {
 			amount,
 		};
 
-		dispatch({ type: 'ADD_TRANSACTION', newTransaction });
+		dispatch({ type: 'ADD_TRANSACTION', payload: newTransaction });
 		setDescription('');
 		setAmount('');
 	};
